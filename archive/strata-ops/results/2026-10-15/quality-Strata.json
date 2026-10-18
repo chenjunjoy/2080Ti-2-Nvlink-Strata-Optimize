@@ -1,0 +1,32 @@
+{
+ "math": {
+  "answer": "Here are the step-by-step deductions for both problems.\n\n### Problem 1: The Bat and the Ball\n\nLet $x$ be the cost of the ball.\nLet $y$ be the cost of the bat.\n\nFrom the problem statement, we have two equations:\n1. The total cost is $1.10:\n   $$x + y = 1.10$$\n2. The bat costs $1.00 more than the ball:\n   $$y = x + 1.00$$\n\nSubstitute the second equation into the first:\n$$x + (x + 1.00) = 1.10$$\n$$2x + 1.00 = 1.10$$\n$$2x = 0.10$$\n$$x = 0.05$$\n\nSo, the ball costs **$0.05** (5 cents).\n*(Check: If the ball is $0.05, the bat is $1.05. $1.05 + $0.05 = $1.10. The bat is $1.00 more than the ball. This is correct.)*\n\n### Problem 2: The Machines and Widgets\n\nLet's analyze the rate of production.\n- 5 machines take 5 minutes to make 5 widgets.\n- This implies that **1 machine takes 5 minutes to make 1 widget**.\n\nNow, consider the scenario with 100 machines making 100 widgets:\n- Since each machine works independently, 100 machines can produce 100 widgets simultaneously.\n- Each machine still takes 5 minutes to produce its single widget.\n- Therefore, the total time required is the same as the time for one machine to produce one widget.\n\nSo, 100 machines take **5 minutes** to make 100 widgets.\n\n### Final Answers\n\n1. The ball costs **$0.05**.\n2. It takes **5 minutes**.",
+  "secs": 5.21,
+  "completion_tokens": 434
+ },
+ "lis_code": {
+  "answer": "```python\ndef solve(nums):\n    if not nums:\n        return 0\n    tails = []\n    for num in nums:\n        lo, hi = 0, len(tails)\n        while lo < hi:\n            mid = (lo + hi) // 2\n            if tails[mid] < num:\n                lo = mid + 1\n            else:\n                hi = mid\n        if lo == len(tails):\n            tails.append(num)\n        else:\n            tails[lo] = num\n    return len(tails)\n```",
+  "secs": 1.66,
+  "completion_tokens": 125
+ },
+ "moE_zh": {
+  "answer": "混合专家（MoE）模型通过引入多个“专家”子网络，在推理时仅激活其中少数几个专家处理当前输入。这种“稀疏激活”机制使得模型总参数量可大幅扩展，但每次前向传播的计算量仅相当于激活部分专家，从而在保持计算效率的同时，显著提升了模型容量与性能。",
+  "secs": 1.45,
+  "completion_tokens": 72
+ },
+ "instr": {
+  "answer": "+ Flexible schedule\n+ No commute\n+ Comfortable environment\n- Social isolation\n- Blurred boundaries\n- Distractions at home",
+  "secs": 0.85,
+  "completion_tokens": 29
+ },
+ "chicken_rabbit": {
+  "answer": "To solve this problem, we can set up a system of linear equations based on the number of heads and legs.\n\n**1. Define Variables:**\nLet $c$ be the number of chickens.\nLet $r$ be the number of rabbits.\n\n**2. Set up Equations:**\n*   **Heads:** Each animal has 1 head.\n    $$c + r = 35$$\n*   **Legs:** Chickens have 2 legs, and rabbits have 4 legs.\n    $$2c + 4r = 94$$\n\n**3. Solve the System:**\n\nFrom the first equation, express $c$ in terms of $r$:\n$$c = 35 - r$$\n\nSubstitute this into the second equation:\n$$2(35 - r) + 4r = 94$$\n\nExpand and simplify:\n$$70 - 2r + 4r = 94$$\n$$70 + 2r = 94$$\n\nSubtract 70 from both sides:\n$$2r = 24$$\n\nDivide by 2:\n$$r = 12$$\n\nNow, find the number of chickens ($c$):\n$$c = 35 - 12$$\n$$c = 23$$\n\n**4. Verification:**\n*   **Heads:** $23 + 12 = 35$ (Correct)\n*   **Legs:** $(23 \\times 2) + (12 \\times 4) = 46 + 48 = 94$ (Correct)\n\n**Answer:**\nThere are **23** chickens and **12** rabbits.",
+  "secs": 3.83,
+  "completion_tokens": 371
+ },
+ "two_sum": {
+  "answer": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []\n```",
+  "secs": 1.04,
+  "completion_tokens": 64
+ }
+}

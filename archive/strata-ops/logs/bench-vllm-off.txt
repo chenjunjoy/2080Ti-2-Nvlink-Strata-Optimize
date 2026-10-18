@@ -1,0 +1,7 @@
+  decode run1: TTFT     135 ms |  26.12 tok/s | 91 tokens
+  decode run2: TTFT      95 ms |  26.25 tok/s | 91 tokens
+  decode run3: TTFT      94 ms |  26.24 tok/s | 91 tokens
+  prefill run1: TTFT   6.35 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.32 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.32 s  (~6K-token cold prompt)
+[vLLM-27B-TP2-NVLink-off] decode 26.24 tok/s | TTFT 95 ms | 6K-prompt TTFT 6.32 s

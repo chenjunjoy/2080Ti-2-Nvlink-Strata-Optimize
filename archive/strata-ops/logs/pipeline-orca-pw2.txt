@@ -1,0 +1,5 @@
+=== orca-pw2 ===
+  decode   :  76.00 tok/s   (75.0, 79.4, 76.0)
+  prefill 6K :  883.7 tok/s (884, 891, 882)
+  prefill 16K: 1189.7 tok/s (1193, 1187)
+[orca-pw2] decode 76.00 | p6K 884 | p16K 1190

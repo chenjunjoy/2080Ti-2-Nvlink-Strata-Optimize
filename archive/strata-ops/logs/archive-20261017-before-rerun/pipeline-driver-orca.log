@@ -1,0 +1,22 @@
+[12:31:52] 等待 IQ2_XS 阶段(pid 30370)结束...
+[12:34:52] 第二阶段开始:Orca 无审查版 (IQ3_XXS)
+wrote /srv/share/Strata/strata-orca-iq3_xxs.pw2.json
+[12:34:52] ARM A: Orca 基准(无 pipeline)
+[12:35:56] 就绪 ✓ (uncensored)
+=== orca-baseline ===
+  decode   :  71.60 tok/s   (64.5, 74.6, 71.6)
+  prefill 6K :  884.3 tok/s (882, 893, 884)
+  prefill 16K: 1180.7 tok/s (1181, 1180)
+[orca-baseline] decode 71.60 | p6K 884 | p16K 1181
+[12:36:56] ARM B: Orca + --pipeline-windows 2
+[strata] 2026-10-17 12:37:10 engine started: /srv/share/Strata/engine/strata --serve --pack /srv/share/Strata-data/packs/orca-iq3_xxs --native /srv/share/Strata-data/models/orca-iq3_xxs/Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf --ple-gguf /srv/share/Strata-data/models/orca-iq3_xxs/Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf --expert-profile /srv/share/Strata/data/expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.5 --mtp /srv/share/Strata-data/mtp/rt --max-context 32768 --kv int8 --vision --vram-reserve-mib 700 --pipeline-windows 2 --layer-split auto
+strata generate: --pipeline-windows 2: 234 MiB of CUDA0 kept out of the expert cache (the second verifier, the GDN snapshots)
+strata serve: --pipeline-windows 2: two verifiers per stage, 2 stages overlap across windows (decode too; the GDN snapshots beside the window)
+=== orca-pw2 ===
+  decode   :  74.40 tok/s   (79.0, 74.4, 72.3)
+  prefill 6K :  888.3 tok/s (880, 888, 888)
+  prefill 16K: 1177.8 tok/s (1178, 1178)
+[orca-pw2] decode 74.40 | p6K 888 | p16K 1178
+[12:39:03] 收尾:保持 Orca 基准运行
+[12:39:51] Orca (基准) 运行中 :8080
+[12:39:51] ALL DONE

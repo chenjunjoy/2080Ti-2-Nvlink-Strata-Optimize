@@ -1,0 +1,7 @@
+  decode run1: TTFT     536 ms |  81.70 tok/s | 254 tokens
+  decode run2: TTFT      78 ms |  84.32 tok/s | 254 tokens
+  decode run3: TTFT      77 ms |  84.50 tok/s | 254 tokens
+  prefill run1: TTFT   6.61 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.63 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.58 s  (~6K-token cold prompt)
+[Strata-IQ2_XS_128K] decode 84.32 tok/s | TTFT 78 ms | 6K-prompt TTFT 6.61 s

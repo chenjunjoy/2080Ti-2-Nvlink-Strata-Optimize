@@ -1,0 +1,26 @@
+{
+ "baseline(tuned)": {
+  "prefill": 885.2,
+  "decode": 88.5
+ },
+ "layer_split_20": {
+  "prefill": 874.4,
+  "decode": 88.5
+ },
+ "prefill_help": {
+  "prefill": 881.6,
+  "decode": 88.2
+ },
+ "pipeline_windows_2": {
+  "prefill": 883.2,
+  "decode": 78.9
+ },
+ "split_mtp_batch": {
+  "prefill": 914.8,
+  "decode": 87.4
+ },
+ "kv_k8v4": {
+  "prefill": 850.7,
+  "decode": 85.6
+ }
+}

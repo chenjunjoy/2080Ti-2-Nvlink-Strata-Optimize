@@ -1,0 +1,26 @@
+[10:20:33] ===== A: Strata Orca IQ3_XXS (--prefill auto) =====
+  decode run1: TTFT     549 ms |  64.97 tok/s | 256 tokens (server tokens in 255 chunks)
+  decode run2: TTFT      86 ms |  69.56 tok/s | 256 tokens (server tokens in 254 chunks)
+  decode run3: TTFT      85 ms |  72.92 tok/s | 256 tokens (server tokens in 254 chunks)
+  prefill run1: TTFT   6.79 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.72 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.72 s  (~6K-token cold prompt)
+[Strata-Orca-IQ3_XXS_prefill-auto] decode 69.56 tok/s | TTFT 86 ms | 6K-prompt TTFT 6.72 s
+[10:22:06] ===== B: vLLM 27B NVLink on (corrected) =====
+  decode run1: TTFT     118 ms |  74.95 tok/s | 256 tokens (server tokens in 91 chunks)
+  decode run2: TTFT      90 ms |  75.42 tok/s | 256 tokens (server tokens in 91 chunks)
+  decode run3: TTFT      92 ms |  75.39 tok/s | 256 tokens (server tokens in 91 chunks)
+  prefill run1: TTFT   4.66 s  (~6K-token cold prompt)
+  prefill run2: TTFT   4.66 s  (~6K-token cold prompt)
+  prefill run3: TTFT   4.67 s  (~6K-token cold prompt)
+[vLLM-27B-NVLink-on] decode 75.39 tok/s | TTFT 92 ms | 6K-prompt TTFT 4.66 s
+[10:24:31] ===== C: vLLM 27B NVLink off (corrected) =====
+  decode run1: TTFT     112 ms |  73.90 tok/s | 256 tokens (server tokens in 91 chunks)
+  decode run2: TTFT      94 ms |  74.35 tok/s | 256 tokens (server tokens in 91 chunks)
+  decode run3: TTFT      93 ms |  74.30 tok/s | 256 tokens (server tokens in 91 chunks)
+  prefill run1: TTFT   6.34 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.32 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.32 s  (~6K-token cold prompt)
+[vLLM-27B-NVLink-off] decode 74.30 tok/s | TTFT 94 ms | 6K-prompt TTFT 6.32 s
+[10:26:49] ===== 恢复 Orca =====
+[10:27:47] ALL DONE

@@ -1,0 +1,5 @@
+tokenizer/: vocab 248320, merges 247587, pre qwen35, specials {'tokenizer.ggml.eos_token_id': 248046, 'tokenizer.ggml.padding_token_id': 248044, 'tokenizer.ggml.bos_token_id': 248044}
+model shards: Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf, Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00002-of-00002.gguf
+index.txt: 1079 tensors, 303 served natively, 0 in extra.bin, arena 1.38 GiB
+conversions.json: 459 tensors converted to the engine's form (96 exact, 363 rounded; max |err| 0.0144)
+compat-bf16: 363 tensors, 1.22 GiB; expert and PLE table bytes unchanged

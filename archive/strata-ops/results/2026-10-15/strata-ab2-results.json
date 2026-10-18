@@ -1,0 +1,27 @@
+{
+ "baseline(tuned)": {
+  "p2k": 680.5,
+  "p6k": 879.7,
+  "decode": 87.6
+ },
+ "prefill_help": {
+  "p2k": 679.5,
+  "p6k": 878.5,
+  "decode": 87.3
+ },
+ "pf_fused": {
+  "p2k": 677.0,
+  "p6k": 876.7,
+  "decode": 87.4
+ },
+ "split_mtp_batch": {
+  "p2k": 697.0,
+  "p6k": 910.0,
+  "decode": 87.3
+ },
+ "mtp_batch+fused": {
+  "p2k": 694.6,
+  "p6k": 909.6,
+  "decode": 87.2
+ }
+}

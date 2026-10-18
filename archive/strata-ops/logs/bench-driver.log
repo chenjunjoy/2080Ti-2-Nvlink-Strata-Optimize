@@ -1,0 +1,34 @@
+[09:58:42] ===== ARM1: Strata Orca IQ3_XXS (32K) =====
+  decode run1: TTFT     755 ms |  59.68 tok/s | 255 tokens
+  decode run2: TTFT      86 ms |  69.58 tok/s | 254 tokens
+  decode run3: TTFT      86 ms |  73.48 tok/s | 254 tokens
+  prefill run1: TTFT  21.64 s  (~6K-token cold prompt)
+  prefill run2: TTFT  21.87 s  (~6K-token cold prompt)
+  prefill run3: TTFT  21.48 s  (~6K-token cold prompt)
+[Strata-Orca-IQ3_XXS_32K] decode 69.58 tok/s | TTFT 86 ms | 6K-prompt TTFT 21.64 s
+[10:00:00] ===== ARM2: Strata IQ2_XS (128K) =====
+  decode run1: TTFT     536 ms |  81.70 tok/s | 254 tokens
+  decode run2: TTFT      78 ms |  84.32 tok/s | 254 tokens
+  decode run3: TTFT      77 ms |  84.50 tok/s | 254 tokens
+  prefill run1: TTFT   6.61 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.63 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.58 s  (~6K-token cold prompt)
+[Strata-IQ2_XS_128K] decode 84.32 tok/s | TTFT 78 ms | 6K-prompt TTFT 6.61 s
+[10:01:27] ===== ARM3: vLLM 27B TP2 (NVLink on) =====
+  decode run1: TTFT     124 ms |  26.51 tok/s | 91 tokens
+  decode run2: TTFT      95 ms |  26.57 tok/s | 91 tokens
+  decode run3: TTFT      95 ms |  26.61 tok/s | 91 tokens
+  prefill run1: TTFT   4.66 s  (~6K-token cold prompt)
+  prefill run2: TTFT   4.67 s  (~6K-token cold prompt)
+  prefill run3: TTFT   4.67 s  (~6K-token cold prompt)
+[vLLM-27B-TP2-NVLink-on] decode 26.57 tok/s | TTFT 95 ms | 6K-prompt TTFT 4.67 s
+[10:03:52] ===== ARM4: vLLM 27B TP2 (NVLink off) =====
+  decode run1: TTFT     135 ms |  26.12 tok/s | 91 tokens
+  decode run2: TTFT      95 ms |  26.25 tok/s | 91 tokens
+  decode run3: TTFT      94 ms |  26.24 tok/s | 91 tokens
+  prefill run1: TTFT   6.35 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.32 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.32 s  (~6K-token cold prompt)
+[vLLM-27B-TP2-NVLink-off] decode 26.24 tok/s | TTFT 95 ms | 6K-prompt TTFT 6.32 s
+[10:06:10] ===== 恢复 Orca 运行 =====
+[10:07:04] ALL DONE

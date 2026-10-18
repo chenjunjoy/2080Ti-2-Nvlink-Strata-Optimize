@@ -1,0 +1,21 @@
+{
+  "label": "strata",
+  "model_requested": "strata",
+  "model_returned": "orcarouter-qwen3.8-flash-next-uncensored-iq3_xxs",
+  "prompt": "Generate an SVG of a pelican riding a bicycle",
+  "temperature": 0,
+  "max_tokens": 8192,
+  "elapsed_seconds": 113.66,
+  "finish_reason": "length",
+  "usage": {
+    "prompt_tokens": 62,
+    "completion_tokens": 8192,
+    "total_tokens": 8254,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "content_chars": 0,
+  "svg_found": false,
+  "svg_xml_valid": false
+}

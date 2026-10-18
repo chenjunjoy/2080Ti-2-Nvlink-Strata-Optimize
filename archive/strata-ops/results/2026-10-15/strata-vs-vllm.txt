@@ -1,0 +1,21 @@
+  decode run1: TTFT     827 ms |  87.41 tok/s | 25 tokens
+  decode run2: TTFT      76 ms |  87.35 tok/s | 25 tokens
+  decode run3: TTFT      77 ms |  87.35 tok/s | 25 tokens
+  prefill run1: TTFT   6.53 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.52 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.56 s  (~6K-token cold prompt)
+[Strata] decode 87.35 tok/s | TTFT 77 ms | 6K-prompt TTFT 6.53 s
+  decode run1: TTFT     491 ms |  83.20 tok/s | 254 tokens
+  decode run2: TTFT      76 ms |  85.40 tok/s | 254 tokens
+  decode run3: TTFT      76 ms |  85.42 tok/s | 254 tokens
+  prefill run1: TTFT   6.57 s  (~6K-token cold prompt)
+  prefill run2: TTFT   6.54 s  (~6K-token cold prompt)
+  prefill run3: TTFT   6.53 s  (~6K-token cold prompt)
+[Strata] decode 85.40 tok/s | TTFT 76 ms | 6K-prompt TTFT 6.54 s
+  decode run1: TTFT     151 ms |  26.64 tok/s | 91 tokens
+  decode run2: TTFT      92 ms |  26.70 tok/s | 91 tokens
+  decode run3: TTFT      92 ms |  26.71 tok/s | 91 tokens
+  prefill run1: TTFT   4.65 s  (~6K-token cold prompt)
+  prefill run2: TTFT   4.66 s  (~6K-token cold prompt)
+  prefill run3: TTFT   4.66 s  (~6K-token cold prompt)
+[vLLM] decode 26.70 tok/s | TTFT 92 ms | 6K-prompt TTFT 4.66 s

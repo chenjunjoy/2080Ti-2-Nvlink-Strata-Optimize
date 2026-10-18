@@ -197,3 +197,12 @@ python3 /srv/share/strata-ops/quality-bench.py
 - 调优前后对比（§2.1）与 pipeline A/B（§2.2）不是同一批次，不能简单叠加为 +10%。
 - 128K 上下文与 `reasoning_effort=none` 未做正式 A/B，仅记录为配置变更。
 - 质量对比为 6 题小样本，不代表模型能力上限。
+
+---
+
+## 8. 原始档案（备份存档）
+
+- [`archive/strata-ops/`](archive/strata-ops/)：原始部署文档、基准脚本、日志、结果与配置备份。
+- [`archive/engine-logs/`](archive/engine-logs/)：Strata 引擎运行日志（IQ2_XS / Orca）。
+
+> 归档时已排除 `.hf_token` 与 `strata-api-key.txt`，并把所有配置/文档中的真实 API key 脱敏为 `<REDACTED>`。详见 [`archive/README.md`](archive/README.md)。

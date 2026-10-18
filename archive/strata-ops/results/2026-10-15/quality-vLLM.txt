@@ -1,0 +1,132 @@
+
+########## [vLLM] math  (4.0s, 576 tok) ##########
+Here are the step-by-step solutions for both problems.
+
+### Problem 1: The Bat and the Ball
+
+**Logical Deduction:**
+1.  Let $b$ be the cost of the ball.
+2.  Let $B$ be the cost of the bat.
+3.  We are given two equations:
+    *   $B + b = 1.10$ (Total cost)
+    *   $B = b + 1.00$ (The bat costs $1.00 more than the ball)
+4.  Substitute the second equation into the first:
+    *   $(b + 1.00) + b = 1.10$
+    *   $2b + 1.00 = 1.10$
+    *   $2b = 0.10$
+    *   $b = 0.05$
+5.  Therefore, the ball costs **$0.05** (5 cents).
+    *   *Check:* If the ball is $0.05, the bat is $1.05. $0.05 + $1.05 = $1.10. The bat ($1.05) is indeed $1.00 more than the ball ($0.05).
+
+*(Note: The intuitive but incorrect answer is often $0.10, but if the ball were $0.10, the bat would be $1.10, making the total $1.20.)*
+
+### Problem 2: The Machines and Widgets
+
+**Logical Deduction:**
+1.  We are told that 5 machines take 5 minutes to make 5 widgets.
+2.  This implies that **1 machine takes 5 minutes to make 1 widget**.
+    *   (Since 5 machines working in parallel for 5 minutes produce 5 widgets, each machine produces 1 widget in that 5-minute timeframe).
+3.  Now, consider 100 machines making 100 widgets.
+4.  Since each machine takes 5 minutes to make 1 widget, and we have 100 machines working simultaneously, each machine will make 1 widget.
+5.  Therefore, it takes **5 minutes** for 100 machines to make 100 widgets.
+
+*(Note: The intuitive but incorrect answer is often 100 minutes, assuming linear scaling of time, but the number of machines scales with the number of widgets, keeping the time constant.)*
+
+### Final Answers
+
+1.  The ball costs **$0.05**.
+2.  It takes **5 minutes**.
+
+########## [vLLM] lis_code  (0.7s, 124 tok) ##########
+```python
+def solve(nums):
+    if not nums:
+        return 0
+    tails = []
+    for num in nums:
+        left, right = 0, len(tails)
+        while left < right:
+            mid = (left + right) // 2
+            if tails[mid] < num:
+                left = mid + 1
+            else:
+                right = mid
+        if left == len(tails):
+            tails.append(num)
+        else:
+            tails[left] = num
+    return len(tails)
+```
+
+########## [vLLM] moE_zh  (2.1s, 100 tok) ##########
+混合专家（MoE）模型将网络中的前馈层替换为多个并行的“专家”子网络。每个输入仅由路由机制激活其中少数几个专家，而非全部。
+
+这种稀疏激活机制使得模型总参数量（容量）可以极大扩展，但单次推理时实际参与计算的参数比例极低。因此，它在保持计算量和推理速度基本不变的前提下，显著提升了模型的表达能力和知识存储规模，实现了“大参数、低算力”的高效平衡。
+
+########## [vLLM] instr  (0.7s, 40 tok) ##########
++ Save time on daily commute
++ Flexible schedule for personal tasks
++ Reduced office distractions
+- Lack of face-to-face interaction
+- Blurred work-life boundaries
+- Potential for social isolation
+
+########## [vLLM] chicken_rabbit  (2.3s, 409 tok) ##########
+To solve this problem, we can use a system of linear equations.
+
+**1. Define the variables:**
+Let $c$ be the number of chickens.
+Let $r$ be the number of rabbits.
+
+**2. Set up the equations:**
+*   **Heads:** Each animal has one head.
+    $$c + r = 35$$
+*   **Legs:** Chickens have 2 legs, and rabbits have 4 legs.
+    $$2c + 4r = 94$$
+
+**3. Solve the system:**
+
+From the first equation, we can express $c$ in terms of $r$:
+$$c = 35 - r$$
+
+Substitute this expression for $c$ into the second equation:
+$$2(35 - r) + 4r = 94$$
+
+Expand and simplify:
+$$70 - 2r + 4r = 94$$
+$$70 + 2r = 94$$
+
+Subtract 70 from both sides:
+$$2r = 24$$
+
+Divide by 2:
+$$r = 12$$
+
+So, there are **12 rabbits**.
+
+Now, substitute the value of $r$ back into the first equation to find $c$:
+$$c + 12 = 35$$
+$$c = 35 - 12$$
+$$c = 23$$
+
+So, there are **23 chickens**.
+
+**4. Verification:**
+*   **Heads:** $23 + 12 = 35$ (Correct)
+*   **Legs:** $(23 \times 2) + (12 \times 4) = 46 + 48 = 94$ (Correct)
+
+**Conclusion:**
+There are **23** chickens and **12** rabbits.
+
+########## [vLLM] two_sum  (0.5s, 60 tok) ##########
+```python
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+```
+
+[saved] /srv/share/quality-vLLM.json

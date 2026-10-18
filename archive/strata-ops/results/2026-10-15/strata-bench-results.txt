@@ -1,0 +1,40 @@
+  run1: prompt     90.2 tok/s | decode  82.10 tok/s | 256 tokens
+  run2: prompt    120.7 tok/s | decode  81.30 tok/s | 256 tokens
+  run3: prompt    120.5 tok/s | decode  81.40 tok/s | 256 tokens
+[baseline] median: prompt 120.5 tok/s | decode 81.40 tok/s
+=== baseline ===
+  run1: prompt     101.5 tok/s | decode  86.20 tok/s
+  run2: prompt     120.9 tok/s | decode  89.20 tok/s
+  run3: prompt     119.5 tok/s | decode  91.60 tok/s
+[decode ] prompt_n=60  median: prompt 119.5 tok/s | decode 89.20 tok/s
+  run1: prompt     880.1 tok/s | decode  64.10 tok/s
+  run2: prompt     114.9 tok/s | decode  64.90 tok/s
+  run3: prompt     114.9 tok/s | decode  64.60 tok/s
+[prefill] prompt_n=5971  median: prompt 114.9 tok/s | decode 64.60 tok/s
+=== baseline ===
+  run1: prompt_n=   72 prompt      89.7 tok/s | decode  82.70 tok/s
+  run2: prompt_n=    7 prompt     119.9 tok/s | decode  83.30 tok/s
+  run3: prompt_n=    7 prompt     120.1 tok/s | decode  82.20 tok/s
+[decode ] median: prompt_n=7 prompt 119.9 tok/s | decode 82.70 tok/s
+  run1: prompt_n= 6001 prompt     881.6 tok/s | decode  65.40 tok/s
+  run2: prompt_n= 6001 prompt     881.5 tok/s | decode  64.50 tok/s
+  run3: prompt_n= 6001 prompt     881.8 tok/s | decode  63.70 tok/s
+[prefill] median: prompt_n=6001 prompt 881.6 tok/s | decode 64.50 tok/s
+=== calibrate ===
+  run1: prompt_n=   72 prompt      87.5 tok/s | decode  74.10 tok/s
+  run2: prompt_n=    7 prompt     118.0 tok/s | decode  88.60 tok/s
+  run3: prompt_n=    7 prompt     119.0 tok/s | decode  90.00 tok/s
+[decode ] median: prompt_n=7 prompt 118.0 tok/s | decode 88.60 tok/s
+  run1: prompt_n= 5999 prompt     888.5 tok/s | decode  70.30 tok/s
+  run2: prompt_n= 6000 prompt     886.6 tok/s | decode  64.30 tok/s
+  run3: prompt_n= 6002 prompt     888.5 tok/s | decode  70.80 tok/s
+[prefill] median: prompt_n=6000 prompt 888.5 tok/s | decode 70.30 tok/s
+=== final ===
+  run1: prompt_n=   72 prompt      90.7 tok/s | decode  73.30 tok/s
+  run2: prompt_n=    7 prompt     117.1 tok/s | decode  87.80 tok/s
+  run3: prompt_n=    7 prompt     117.6 tok/s | decode  89.00 tok/s
+[decode ] median: prompt_n=7 prompt 117.1 tok/s | decode 87.80 tok/s
+  run1: prompt_n= 5999 prompt     910.0 tok/s | decode  69.30 tok/s
+  run2: prompt_n= 6002 prompt     911.0 tok/s | decode  69.60 tok/s
+  run3: prompt_n= 6001 prompt     907.6 tok/s | decode  63.00 tok/s
+[prefill] median: prompt_n=6001 prompt 910.0 tok/s | decode 69.30 tok/s

@@ -1,0 +1,129 @@
+
+########## [Strata] math  (5.2s, 434 tok) ##########
+Here are the step-by-step deductions for both problems.
+
+### Problem 1: The Bat and the Ball
+
+Let $x$ be the cost of the ball.
+Let $y$ be the cost of the bat.
+
+From the problem statement, we have two equations:
+1. The total cost is $1.10:
+   $$x + y = 1.10$$
+2. The bat costs $1.00 more than the ball:
+   $$y = x + 1.00$$
+
+Substitute the second equation into the first:
+$$x + (x + 1.00) = 1.10$$
+$$2x + 1.00 = 1.10$$
+$$2x = 0.10$$
+$$x = 0.05$$
+
+So, the ball costs **$0.05** (5 cents).
+*(Check: If the ball is $0.05, the bat is $1.05. $1.05 + $0.05 = $1.10. The bat is $1.00 more than the ball. This is correct.)*
+
+### Problem 2: The Machines and Widgets
+
+Let's analyze the rate of production.
+- 5 machines take 5 minutes to make 5 widgets.
+- This implies that **1 machine takes 5 minutes to make 1 widget**.
+
+Now, consider the scenario with 100 machines making 100 widgets:
+- Since each machine works independently, 100 machines can produce 100 widgets simultaneously.
+- Each machine still takes 5 minutes to produce its single widget.
+- Therefore, the total time required is the same as the time for one machine to produce one widget.
+
+So, 100 machines take **5 minutes** to make 100 widgets.
+
+### Final Answers
+
+1. The ball costs **$0.05**.
+2. It takes **5 minutes**.
+
+########## [Strata] lis_code  (1.7s, 125 tok) ##########
+```python
+def solve(nums):
+    if not nums:
+        return 0
+    tails = []
+    for num in nums:
+        lo, hi = 0, len(tails)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if tails[mid] < num:
+                lo = mid + 1
+            else:
+                hi = mid
+        if lo == len(tails):
+            tails.append(num)
+        else:
+            tails[lo] = num
+    return len(tails)
+```
+
+########## [Strata] moE_zh  (1.4s, 72 tok) ##########
+混合专家（MoE）模型通过引入多个“专家”子网络，在推理时仅激活其中少数几个专家处理当前输入。这种“稀疏激活”机制使得模型总参数量可大幅扩展，但每次前向传播的计算量仅相当于激活部分专家，从而在保持计算效率的同时，显著提升了模型容量与性能。
+
+########## [Strata] instr  (0.8s, 29 tok) ##########
++ Flexible schedule
++ No commute
++ Comfortable environment
+- Social isolation
+- Blurred boundaries
+- Distractions at home
+
+########## [Strata] chicken_rabbit  (3.8s, 371 tok) ##########
+To solve this problem, we can set up a system of linear equations based on the number of heads and legs.
+
+**1. Define Variables:**
+Let $c$ be the number of chickens.
+Let $r$ be the number of rabbits.
+
+**2. Set up Equations:**
+*   **Heads:** Each animal has 1 head.
+    $$c + r = 35$$
+*   **Legs:** Chickens have 2 legs, and rabbits have 4 legs.
+    $$2c + 4r = 94$$
+
+**3. Solve the System:**
+
+From the first equation, express $c$ in terms of $r$:
+$$c = 35 - r$$
+
+Substitute this into the second equation:
+$$2(35 - r) + 4r = 94$$
+
+Expand and simplify:
+$$70 - 2r + 4r = 94$$
+$$70 + 2r = 94$$
+
+Subtract 70 from both sides:
+$$2r = 24$$
+
+Divide by 2:
+$$r = 12$$
+
+Now, find the number of chickens ($c$):
+$$c = 35 - 12$$
+$$c = 23$$
+
+**4. Verification:**
+*   **Heads:** $23 + 12 = 35$ (Correct)
+*   **Legs:** $(23 \times 2) + (12 \times 4) = 46 + 48 = 94$ (Correct)
+
+**Answer:**
+There are **23** chickens and **12** rabbits.
+
+########## [Strata] two_sum  (1.0s, 64 tok) ##########
+```python
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []
+```
+
+[saved] /srv/share/quality-Strata.json

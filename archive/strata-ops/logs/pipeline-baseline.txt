@@ -1,0 +1,5 @@
+=== baseline ===
+  decode   :  84.80 tok/s   (81.5, 84.8, 85.1)
+  prefill 6K :  912.7 tok/s (909, 914, 913)
+  prefill 16K: 1269.1 tok/s (1271, 1267)
+[baseline] decode 84.80 | p6K 913 | p16K 1269

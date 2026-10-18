@@ -1,0 +1,29 @@
+{
+  "label": "vllm",
+  "model_requested": "Qwen3.8-27B-NVFP4",
+  "model_returned": "Qwen3.8-27B-NVFP4",
+  "prompt": "创建一个HTML，内容是SVG绘制一个鹈鹕骑自行车的2D动画，你不需要任何测试，只靠你自己完成，不要使用任何skill，不要依赖我本地的AGENTS.md",
+  "temperature": 0,
+  "max_tokens": 20000,
+  "tool_choice": "none",
+  "reasoning_effort": "none",
+  "elapsed_seconds": 70.92,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 51,
+    "total_tokens": 9008,
+    "completion_tokens": 8957,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0,
+      "multimodal_tokens": null
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "content_chars": 20325,
+  "html_found": true,
+  "svg_tag_found": true,
+  "animation_tag_found": true
+}

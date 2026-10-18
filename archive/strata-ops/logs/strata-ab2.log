@@ -1,0 +1,19 @@
+baseline (tuned)
+  baseline: 2K 680.5 | 6K 879.7 | decode 87.60
+variant prefill_help
+  2K 679.5 (-0.1%) | 6K 878.5 (-0.1%) | decode 87.30 (-0.3%)
+variant pf_fused
+  2K 677.0 (-0.5%) | 6K 876.7 (-0.3%) | decode 87.40 (-0.2%)
+variant split_mtp_batch
+  2K 697.0 (+2.4%) | 6K 910.0 (+3.4%) | decode 87.30 (-0.3%)
+variant mtp_batch+fused
+  2K 694.6 (+2.1%) | 6K 909.6 (+3.4%) | decode 87.20 (-0.5%)
+restored tuned baseline; restarting
+
+=== ROUND 2 SUMMARY (median of 3) ===
+variant                   2K        6K    decode
+baseline(tuned)        680.5     879.7     87.60
+prefill_help           679.5     878.5     87.30
+pf_fused               677.0     876.7     87.40
+split_mtp_batch        697.0     910.0     87.30
+mtp_batch+fused        694.6     909.6     87.20

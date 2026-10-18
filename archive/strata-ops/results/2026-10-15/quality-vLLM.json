@@ -1,0 +1,32 @@
+{
+ "math": {
+  "answer": "Here are the step-by-step solutions for both problems.\n\n### Problem 1: The Bat and the Ball\n\n**Logical Deduction:**\n1.  Let $b$ be the cost of the ball.\n2.  Let $B$ be the cost of the bat.\n3.  We are given two equations:\n    *   $B + b = 1.10$ (Total cost)\n    *   $B = b + 1.00$ (The bat costs $1.00 more than the ball)\n4.  Substitute the second equation into the first:\n    *   $(b + 1.00) + b = 1.10$\n    *   $2b + 1.00 = 1.10$\n    *   $2b = 0.10$\n    *   $b = 0.05$\n5.  Therefore, the ball costs **$0.05** (5 cents).\n    *   *Check:* If the ball is $0.05, the bat is $1.05. $0.05 + $1.05 = $1.10. The bat ($1.05) is indeed $1.00 more than the ball ($0.05).\n\n*(Note: The intuitive but incorrect answer is often $0.10, but if the ball were $0.10, the bat would be $1.10, making the total $1.20.)*\n\n### Problem 2: The Machines and Widgets\n\n**Logical Deduction:**\n1.  We are told that 5 machines take 5 minutes to make 5 widgets.\n2.  This implies that **1 machine takes 5 minutes to make 1 widget**.\n    *   (Since 5 machines working in parallel for 5 minutes produce 5 widgets, each machine produces 1 widget in that 5-minute timeframe).\n3.  Now, consider 100 machines making 100 widgets.\n4.  Since each machine takes 5 minutes to make 1 widget, and we have 100 machines working simultaneously, each machine will make 1 widget.\n5.  Therefore, it takes **5 minutes** for 100 machines to make 100 widgets.\n\n*(Note: The intuitive but incorrect answer is often 100 minutes, assuming linear scaling of time, but the number of machines scales with the number of widgets, keeping the time constant.)*\n\n### Final Answers\n\n1.  The ball costs **$0.05**.\n2.  It takes **5 minutes**.",
+  "secs": 4.01,
+  "completion_tokens": 576
+ },
+ "lis_code": {
+  "answer": "```python\ndef solve(nums):\n    if not nums:\n        return 0\n    tails = []\n    for num in nums:\n        left, right = 0, len(tails)\n        while left < right:\n            mid = (left + right) // 2\n            if tails[mid] < num:\n                left = mid + 1\n            else:\n                right = mid\n        if left == len(tails):\n            tails.append(num)\n        else:\n            tails[left] = num\n    return len(tails)\n```",
+  "secs": 0.73,
+  "completion_tokens": 124
+ },
+ "moE_zh": {
+  "answer": "混合专家（MoE）模型将网络中的前馈层替换为多个并行的“专家”子网络。每个输入仅由路由机制激活其中少数几个专家，而非全部。\n\n这种稀疏激活机制使得模型总参数量（容量）可以极大扩展，但单次推理时实际参与计算的参数比例极低。因此，它在保持计算量和推理速度基本不变的前提下，显著提升了模型的表达能力和知识存储规模，实现了“大参数、低算力”的高效平衡。",
+  "secs": 2.11,
+  "completion_tokens": 100
+ },
+ "instr": {
+  "answer": "+ Save time on daily commute\n+ Flexible schedule for personal tasks\n+ Reduced office distractions\n- Lack of face-to-face interaction\n- Blurred work-life boundaries\n- Potential for social isolation",
+  "secs": 0.65,
+  "completion_tokens": 40
+ },
+ "chicken_rabbit": {
+  "answer": "To solve this problem, we can use a system of linear equations.\n\n**1. Define the variables:**\nLet $c$ be the number of chickens.\nLet $r$ be the number of rabbits.\n\n**2. Set up the equations:**\n*   **Heads:** Each animal has one head.\n    $$c + r = 35$$\n*   **Legs:** Chickens have 2 legs, and rabbits have 4 legs.\n    $$2c + 4r = 94$$\n\n**3. Solve the system:**\n\nFrom the first equation, we can express $c$ in terms of $r$:\n$$c = 35 - r$$\n\nSubstitute this expression for $c$ into the second equation:\n$$2(35 - r) + 4r = 94$$\n\nExpand and simplify:\n$$70 - 2r + 4r = 94$$\n$$70 + 2r = 94$$\n\nSubtract 70 from both sides:\n$$2r = 24$$\n\nDivide by 2:\n$$r = 12$$\n\nSo, there are **12 rabbits**.\n\nNow, substitute the value of $r$ back into the first equation to find $c$:\n$$c + 12 = 35$$\n$$c = 35 - 12$$\n$$c = 23$$\n\nSo, there are **23 chickens**.\n\n**4. Verification:**\n*   **Heads:** $23 + 12 = 35$ (Correct)\n*   **Legs:** $(23 \\times 2) + (12 \\times 4) = 46 + 48 = 94$ (Correct)\n\n**Conclusion:**\nThere are **23** chickens and **12** rabbits.",
+  "secs": 2.31,
+  "completion_tokens": 409
+ },
+ "two_sum": {
+  "answer": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n```",
+  "secs": 0.46,
+  "completion_tokens": 60
+ }
+}

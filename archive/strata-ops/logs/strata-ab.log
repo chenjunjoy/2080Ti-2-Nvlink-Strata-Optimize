@@ -1,0 +1,22 @@
+baseline (tuned) — measuring
+  baseline: prefill 885.2 | decode 88.50
+variant layer_split_20 — applying + restart
+  layer_split_20: prefill 874.4 (-1.2%) | decode 88.50 (+0.0%)
+variant prefill_help — applying + restart
+  prefill_help: prefill 881.6 (-0.4%) | decode 88.20 (-0.3%)
+variant pipeline_windows_2 — applying + restart
+  pipeline_windows_2: prefill 883.2 (-0.2%) | decode 78.90 (-10.8%)
+variant split_mtp_batch — applying + restart
+  split_mtp_batch: prefill 914.8 (+3.3%) | decode 87.40 (-1.2%)
+variant kv_k8v4 — applying + restart
+  kv_k8v4: prefill 850.7 (-3.9%) | decode 85.60 (-3.3%)
+restored tuned baseline config; restarting
+
+=== SUMMARY (median of 3) ===
+variant               prefill tok/s  decode tok/s
+baseline(tuned)               885.2         88.50
+layer_split_20                874.4         88.50
+prefill_help                  881.6         88.20
+pipeline_windows_2            883.2         78.90
+split_mtp_batch               914.8         87.40
+kv_k8v4                       850.7         85.60

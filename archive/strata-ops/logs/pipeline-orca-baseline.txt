@@ -1,0 +1,5 @@
+=== orca-baseline ===
+  decode   :  72.50 tok/s   (66.2, 75.5, 72.5)
+  prefill 6K :  894.1 tok/s (887, 896, 894)
+  prefill 16K: 1198.5 tok/s (1195, 1202)
+[orca-baseline] decode 72.50 | p6K 894 | p16K 1198

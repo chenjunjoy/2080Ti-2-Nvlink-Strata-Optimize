@@ -1,0 +1,93 @@
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#87CEEB"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="220" width="400" height="80" fill="#8B4513"/>
+  
+  <!-- Bicycle - Rear Wheel -->
+  <circle cx="120" cy="210" r="35" fill="none" stroke="#333" stroke-width="3"/>
+  <circle cx="120" cy="210" r="30" fill="none" stroke="#666" stroke-width="1"/>
+  <!-- Spokes rear -->
+  <line x1="120" y1="175" x2="120" y2="245" stroke="#666" stroke-width="1"/>
+  <line x1="85" y1="210" x2="155" y2="210" stroke="#666" stroke-width="1"/>
+  <line x1="95" y1="185" x2="145" y2="235" stroke="#666" stroke-width="1"/>
+  <line x1="95" y1="235" x2="145" y2="185" stroke="#666" stroke-width="1"/>
+  
+  <!-- Bicycle - Front Wheel -->
+  <circle cx="280" cy="210" r="35" fill="none" stroke="#333" stroke-width="3"/>
+  <circle cx="280" cy="210" r="30" fill="none" stroke="#666" stroke-width="1"/>
+  <!-- Spokes front -->
+  <line x1="280" y1="175" x2="280" y2="245" stroke="#666" stroke-width="1"/>
+  <line x1="245" y1="210" x2="315" y2="210" stroke="#666" stroke-width="1"/>
+  <line x1="255" y1="185" x2="305" y2="235" stroke="#666" stroke-width="1"/>
+  <line x1="255" y1="235" x2="305" y2="185" stroke="#666" stroke-width="1"/>
+  
+  <!-- Bicycle Frame -->
+  <!-- Chain stay (rear wheel to bottom bracket) -->
+  <line x1="120" y1="210" x2="185" y2="195" stroke="#333" stroke-width="3"/>
+  <!-- Seat stay (rear wheel to seat post) -->
+  <line x1="120" y1="210" x2="175" y2="160" stroke="#333" stroke-width="3"/>
+  <!-- Down tube (bottom bracket to head tube) -->
+  <line x1="185" y1="195" x2="260" y2="170" stroke="#333" stroke-width="3"/>
+  <!-- Top tube (seat post to head tube) -->
+  <line x1="175" y1="160" x2="260" y2="170" stroke="#333" stroke-width="3"/>
+  <!-- Head tube -->
+  <line x1="260" y1="170" x2="280" y2="210" stroke="#333" stroke-width="3"/>
+  <!-- Fork -->
+  <line x1="260" y1="170" x2="280" y2="210" stroke="#333" stroke-width="3"/>
+  <!-- Seat post -->
+  <line x1="175" y1="160" x2="175" y2="145" stroke="#333" stroke-width="3"/>
+  <!-- Handlebar stem -->
+  <line x1="260" y1="170" x2="270" y2="155" stroke="#333" stroke-width="3"/>
+  <!-- Handlebars -->
+  <line x1="270" y1="155" x2="285" y2="145" stroke="#333" stroke-width="3"/>
+  <line x1="270" y1="155" x2="255" y2="145" stroke="#333" stroke-width="3"/>
+  
+  <!-- Pedals/Crank -->
+  <circle cx="185" cy="195" r="5" fill="#333"/>
+  <line x1="185" y1="195" x2="170" y2="210" stroke="#333" stroke-width="2"/>
+  <line x1="185" y1="195" x2="200" y2="180" stroke="#333" stroke-width="2"/>
+  
+  <!-- Pelican Body -->
+  <ellipse cx="175" cy="130" rx="35" ry="25" fill="#F5F5DC"/>
+  
+  <!-- Pelican Body shading -->
+  <ellipse cx="175" cy="135" rx="30" ry="18" fill="#E8E8D0"/>
+  
+  <!-- Pelican Tail -->
+  <path d="M140 125 Q125 115 130 105 Q135 110 140 125" fill="#E8E8D0"/>
+  
+  <!-- Pelican Neck -->
+  <path d="M195 125 Q210 110 220 100 Q225 95 230 90" fill="none" stroke="#F5F5DC" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Pelican Head -->
+  <ellipse cx="235" cy="85" rx="18" ry="14" fill="#F5F5DC"/>
+  
+  <!-- Pelican Beak - Upper -->
+  <path d="M245 80 Q270 75 285 82 Q280 85 270 85 Q260 83 250 82 Z" fill="#FFA500"/>
+  
+  <!-- Pelican Beak - Lower/Pouch -->
+  <path d="M245 88 Q265 95 280 90 Q275 95 265 93 Q255 92 248 90 Z" fill="#FF8C00"/>
+  
+  <!-- Pelican Eye -->
+  <circle cx="238" cy="82" r="3" fill="#333"/>
+  <circle cx="239" cy="81" r="1" fill="white"/>
+  
+  <!-- Pelican Wing -->
+  <path d="M160 120 Q150 130 155 145 Q165 140 170 130 Q165 125 160 120" fill="#E8E8D0"/>
+  
+  <!-- Pelican Legs -->
+  <line x1="170" y1="145" x2="170" y2="195" stroke="#FFA500" stroke-width="4" stroke-linecap="round"/>
+  <line x1="180" y1="145" x2="185" y2="195" stroke="#FFA500" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Feet on pedals -->
+  <ellipse cx="170" cy="210" rx="8" ry="4" fill="#FFA500"/>
+  <ellipse cx="200" cy="180" rx="8" ry="4" fill="#FFA500"/>
+  
+  <!-- Handlebar grips -->
+  <circle cx="285" cy="145" r="4" fill="#333"/>
+  <circle cx="255" cy="145" r="4" fill="#333"/>
+</svg>
+```

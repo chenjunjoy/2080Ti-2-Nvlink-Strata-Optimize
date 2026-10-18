@@ -1,0 +1,7 @@
+  decode run1: TTFT     755 ms |  59.68 tok/s | 255 tokens
+  decode run2: TTFT      86 ms |  69.58 tok/s | 254 tokens
+  decode run3: TTFT      86 ms |  73.48 tok/s | 254 tokens
+  prefill run1: TTFT  21.64 s  (~6K-token cold prompt)
+  prefill run2: TTFT  21.87 s  (~6K-token cold prompt)
+  prefill run3: TTFT  21.48 s  (~6K-token cold prompt)
+[Strata-Orca-IQ3_XXS_32K] decode 69.58 tok/s | TTFT 86 ms | 6K-prompt TTFT 21.64 s

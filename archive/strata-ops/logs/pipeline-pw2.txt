@@ -1,0 +1,5 @@
+=== pw2 ===
+  decode   :  88.10 tok/s   (86.3, 88.2, 88.1)
+  prefill 6K :  903.4 tok/s (903, 910, 903)
+  prefill 16K: 1265.7 tok/s (1268, 1264)
+[pw2] decode 88.10 | p6K 903 | p16K 1266

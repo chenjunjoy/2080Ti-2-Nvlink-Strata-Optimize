@@ -1,0 +1,27 @@
+{
+  "label": "vllm",
+  "model_requested": "Qwen3.8-27B-NVFP4",
+  "model_returned": "Qwen3.8-27B-NVFP4",
+  "prompt": "Generate an SVG of a pelican riding a bicycle",
+  "temperature": 0,
+  "max_tokens": 8192,
+  "reasoning_effort": "none",
+  "elapsed_seconds": 16.51,
+  "finish_reason": "stop",
+  "usage": {
+    "prompt_tokens": 22,
+    "total_tokens": 2647,
+    "completion_tokens": 2625,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0,
+      "multimodal_tokens": null
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  },
+  "content_chars": 5238,
+  "svg_found": true,
+  "svg_xml_valid": true
+}
