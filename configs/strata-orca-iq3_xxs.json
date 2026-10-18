@@ -1,0 +1,55 @@
+{
+ "exe": "/srv/share/Strata/engine/strata",
+ "args": [
+  "--pack",
+  "/srv/share/Strata-data/packs/orca-iq3_xxs",
+  "--native",
+  "/srv/share/Strata-data/models/orca-iq3_xxs/Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/srv/share/Strata-data/models/orca-iq3_xxs/Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf",
+  "--expert-profile",
+  "/srv/share/Strata/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--spec",
+  "4",
+  "--spec-min-p",
+  "0.5",
+  "--mtp",
+  "/srv/share/Strata-data/mtp/rt",
+  "--max-context",
+  "131072",
+  "--kv",
+  "int8",
+  "--vision",
+  "--vram-reserve-mib",
+  "700"
+ ],
+ "cwd": "/srv/share/Strata",
+ "tokenizer": "/srv/share/Strata-data/packs/orca-iq3_xxs/tokenizer",
+ "model_name": "orcarouter-qwen3.8-flash-next-uncensored-iq3_xxs",
+ "log": "/srv/share/Strata/strata-orca-iq3_xxs.log",
+ "lib_dirs": [
+  "/usr/local/cuda-13.0/bin",
+  "/usr/local/cuda-13.0/lib64"
+ ],
+ "port": 8080,
+ "gpu": [
+  0,
+  1
+ ],
+ "gpus_asked": true,
+ "layer_split": "auto",
+ "host": "0.0.0.0",
+ "api_key": "<REDACTED>",
+ "reasoning_effort": "none",
+ "vision": {
+  "exe": "/srv/share/Strata/engine/strata-vision",
+  "mmproj": "/srv/share/Strata-data/models/orca-iq3_xxs/mmproj-Qwen3.8-Flash-Next-Uncensored-F16.gguf",
+  "model": "/srv/share/Strata-data/models/orca-iq3_xxs/Qwen3.8-Flash-Next-Uncensored-IQ3_XXS-00001-of-00002.gguf",
+  "gpu": true,
+  "max_tokens": 1024
+ }
+}
