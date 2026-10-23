@@ -1,0 +1,8 @@
+=== iq2-opt ===
+prefill prompt_n=  5998   1084.8 tok/s (   5.6s wall)
+prefill prompt_n=  6000   1057.5 tok/s (   5.7s wall)
+prefill prompt_n= 23834   1740.5 tok/s (  13.8s wall)
+prefill prompt_n= 23833   1717.3 tok/s (  14.0s wall)
+decode  gen_n=256  86.00 tok/s (   3.8s wall)
+decode  gen_n=256  85.10 tok/s (   3.5s wall)
+SUMMARY {"tag": "iq2-opt", "prefill": {"32000": {"prompt_n": 5999.0, "tps": 1071.15}, "128000": {"prompt_n": 23833.5, "tps": 1728.9}}, "decode": {"gen_n": 256.0, "tps": 85.55}}

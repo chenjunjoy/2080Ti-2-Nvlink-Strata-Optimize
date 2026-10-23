@@ -1,0 +1,7 @@
+=== split26 ===
+prefill prompt_n=  6001   1064.2 tok/s (   5.7s wall)
+prefill prompt_n= 23834   1778.6 tok/s (  13.5s wall)
+prefill prompt_n= 89224   2236.2 tok/s (  40.1s wall)
+decode  gen_n=256  82.00 tok/s (   3.7s wall)
+decode  gen_n=256  83.50 tok/s (   3.6s wall)
+SUMMARY {"tag": "split26", "prefill": {"32000": {"prompt_n": 6001, "tps": 1064.2}, "128000": {"prompt_n": 23834, "tps": 1778.6}, "480000": {"prompt_n": 89224, "tps": 2236.2}}, "decode": {"gen_n": 256.0, "tps": 82.75}}

@@ -1,0 +1,7 @@
+=== env+pw2 ===
+prefill prompt_n=  5995   1047.0 tok/s (   5.8s wall)
+prefill prompt_n= 23834   1625.1 tok/s (  14.8s wall)
+prefill prompt_n= 89225   1924.9 tok/s (  46.5s wall)
+decode  gen_n=256  76.30 tok/s (   4.1s wall)
+decode  gen_n=256  79.40 tok/s (   3.9s wall)
+SUMMARY {"tag": "env+pw2", "prefill": {"32000": {"prompt_n": 5995, "tps": 1047.0}, "128000": {"prompt_n": 23834, "tps": 1625.1}, "480000": {"prompt_n": 89225, "tps": 1924.9}}, "decode": {"gen_n": 256.0, "tps": 77.85}}

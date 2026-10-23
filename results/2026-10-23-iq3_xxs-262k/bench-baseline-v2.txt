@@ -1,0 +1,7 @@
+=== baseline ===
+prefill prompt_n=  6000    901.0 tok/s (   6.7s wall)
+prefill prompt_n= 23833   1345.3 tok/s (  17.8s wall)
+prefill prompt_n= 89229   1467.3 tok/s (  61.0s wall)
+decode  gen_n=256  69.70 tok/s (   4.6s wall)
+decode  gen_n=256  78.80 tok/s (   4.1s wall)
+SUMMARY {"tag": "baseline", "prefill": {"32000": {"prompt_n": 6000, "tps": 901.0}, "128000": {"prompt_n": 23833, "tps": 1345.3}, "480000": {"prompt_n": 89229, "tps": 1467.3}}, "decode": {"gen_n": 256.0, "tps": 74.25}}

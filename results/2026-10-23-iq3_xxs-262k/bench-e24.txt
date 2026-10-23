@@ -1,0 +1,7 @@
+=== split24 ===
+prefill prompt_n=  6002   1065.0 tok/s (   5.7s wall)
+prefill prompt_n= 23831   1783.8 tok/s (  13.4s wall)
+prefill prompt_n= 89222   2238.1 tok/s (  40.0s wall)
+decode  gen_n=256  80.30 tok/s (   3.8s wall)
+decode  gen_n=256  86.70 tok/s (   3.6s wall)
+SUMMARY {"tag": "split24", "prefill": {"32000": {"prompt_n": 6002, "tps": 1065.0}, "128000": {"prompt_n": 23831, "tps": 1783.8}, "480000": {"prompt_n": 89222, "tps": 2238.1}}, "decode": {"gen_n": 256.0, "tps": 83.5}}

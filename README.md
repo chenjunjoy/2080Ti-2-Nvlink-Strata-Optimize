@@ -18,6 +18,7 @@
 3. **Strata 用不到 NVLink**：层并行（layer split）不是张量并行，无 P2P/AllReduce，验证窗口之间只传几百 KB 激活，走 PCIe ~6 GB/s 即可。
 4. **负载选型**：Strata IQ2_XS 生成快（84 tok/s、125B）；vLLM 27B 长提示读取更快（6K 4.66 s）且吃 NVLink；无审查的 vLLM 27B + DFlash2 生成最快（93.7 tok/s）。
 5. **质量**：6 道基准题 Strata(125B IQ2_XS) 与 vLLM(27B NVFP4) **全部打平**。
+6. **2026-10-23 更新**：按 Qwen3.8 IQ3_S 双 2080Ti 指南重调 262K（SC117 IQ3_XXS）配置：prefill **+18% / +30% / +50%**（6K / 24K / 89K），decode **+8–13%**，针召回 12/12。详见 §9。
 
 ---
 
@@ -206,3 +207,91 @@ python3 /srv/share/strata-ops/quality-bench.py
 - [`archive/engine-logs/`](archive/engine-logs/)：Strata 引擎运行日志（IQ2_XS / Orca）。
 
 > 归档时已排除 `.hf_token` 与 `strata-api-key.txt`，并把所有配置/文档中的真实 API key 脱敏为 `<REDACTED>`。详见 [`archive/README.md`](archive/README.md)。
+
+---
+
+## 9. 2026-10-23 更新：按 IQ3_S 双 2080Ti 指南优化 262K
+
+> 对象：`SC117 Qwen3.8-Flash-Next abliterated IQ3_XXS`，262144 context，2×2080Ti 22G，本机约 60 GiB 可用内存，引擎 0.1.44.1。
+> 约束：**不下载新权重、不重编译引擎**，只使用 0.1.44.1 已支持的开关。参考文档的 9 个 sm_75 PR 批次（v0.1.43）在本机二进制中大多没有对应 env（见 §9.5），因此未打补丁、也未设置无效变量。
+
+### 9.1 最终改动（已生效）
+
+配置文件：`/srv/share/Strata/strata-sc117-iq3_xxs.json`（样本见 [`configs/strata-sc117-iq3_xxs.json`](configs/strata-sc117-iq3_xxs.json)）
+
+| 项 | 原值 | 新值 | 说明 |
+|---|---|---|---|
+| `layer_split` | `20` | **`24`** | 48 层在两张 22G 卡上对半；本机扫描 18/20/22/24/26，24 最优 |
+| `env.STRATA_BF16_TC` | 未设 | **`1`** | sm_75 的 BF16 投影转 FP16 张量核；prefill 主收益 |
+| `env.STRATA_SELECT_SIMT` | 未设 | **`1`** | 0.1.44.1 只接受 `1`（参考文档的 `2` 在本版本不存在） |
+| `env.STRATA_PREFILL_HELP` | 未设 | **`1`** | 层切分空闲卡分担单块短 prompt；长 prompt 自动不生效 |
+| `env.STRATA_SPLIT_MTP_BATCH` | `1` | `1` | 保留 |
+| `--pipeline-windows` | 无 | **`2`** | NVIDIA 默认关，显式开；decode 窗口跨两 stage 重叠 |
+| `--conversation-cache-*` | 无 | **`4096 / 8 / min-tokens 2048`** | 60 GiB 机器留余量；未照抄指南的 16384/12 |
+| `--prefill` | `auto` | **`auto`（保持）** | `auto:16384` 在本机反而更慢，见 §9.4 |
+| `--max-context` / `--kv` / `--kv-resident` | 262144 / int8 / 32768 | 不变 | 指南同款 |
+| `--vram-reserve-mib` | `1024` | 不变 | 指南 700 偏激进；262K 下保留 1024 |
+| vision | GPU | 不变 | 视觉实测正常；改 CPU 对文本速度无收益 |
+
+备份：`/srv/share/strata-ops/backups/strata-sc117-iq3_xxs.json.pre-opt-20261023-142008`。
+
+### 9.2 实测（同机、262K、单请求、greedy、thinking off）
+
+| Prompt | 基线 tok/s | 优化后 tok/s | 变化 |
+|---|---:|---:|---:|
+| 6.0K prefill | 901.0 | **1060.1** | **+17.7%** |
+| 23.8K prefill | 1345.3 | **1752.2** | **+30.3%** |
+| 89.2K prefill | 1467.3 | **2196.8** | **+49.7%** |
+| decode（256 tok） | 74.3 | **84.1** | **+13%**（保守 +8–13%） |
+
+- 基线：split 20、无 env 补丁、无 pipeline、8K chunk。
+- 优化后：split 24、BF16_TC+SIMT+HELP、pipeline 2、8K chunk。
+- decode 波动较大：基线 2 次（69.7 / 78.8），最终 5 次（81.6–87.0，中位 84.1）。prefill 多次重复误差约 1–2%。
+- 原始输出：[`results/2026-10-23-iq3_xxs-262k/`](results/2026-10-23-iq3_xxs-262k/)。
+
+### 9.3 分项归因
+
+| 组合 | 6K | 23.8K | 89.2K | decode | 结论 |
+|---|---:|---:|---:|---:|---|
+| 基线（split20） | 901 | 1345 | 1467 | 74.3 | — |
+| + env（BF16_TC/SIMT/HELP） | 1051 | 1632 | 1932 | 74.7 | prefill **+17/+21/+32%**，decode 不变 |
+| + pipeline 2 | 1047 | 1625 | 1925 | 77.9 | decode **+4.2%**，prefill 持平 |
+| + split 24 | 1065 | 1784 | 2238 | 83.5 | 相对 split20 再 **+2/+10/+16%**（prefill） |
+
+层切分扫描（env+pipeline 固定，单位 tok/s）：
+
+| split | 6K | 23.8K | 89.2K | decode |
+|---:|---:|---:|---:|---:|
+| 18 | 1028 | 1541 | 1767 | 75.1 |
+| 20 | 1047 | 1625 | 1925 | 77.9 |
+| 22 | 1059 | 1676 | 2023 | 81.2 |
+| **24** | **1065** | **1784** | **2238** | **83.5** |
+| 26 | 1064 | 1779 | 2236 | 82.8 |
+
+### 9.4 没有照抄的项（本机实测否决）
+
+- **`--prefill auto:16384`**：split24 下 6K 持平、23.8K **−21%**、89.2K **−3%**。16K chunk 要借走每卡约一半专家缓存（7.26 GiB），中等长度 prompt 的专家 miss 抵消了大 chunk 收益。保留 `auto`（8K）。
+- **`--conversation-cache-mib 16384 --slots 12`**：262K 加载后 `MemAvailable` 只剩约 9 GiB，照抄会挤压引擎/系统；改为 4096/8，并加 `min-tokens 2048` 防短请求占槽。
+- **vision 改 CPU**：文本路径专家命中率已接近 100%，腾出的显存换不到 decode 收益；GPU 视觉保留。
+- **`reasoning_budget_tokens: 4000`**：服务默认仍是 `reasoning_effort: none`（短答/测速必须），思考由请求级覆盖。
+
+### 9.5 参考文档与 0.1.44.1 的差异
+
+参考文档基于 v0.1.43 + 9 个 sm_75 PR。本机 0.1.44.1 中**不存在**以下 env（设置也是空操作），因此没有写入：
+
+`STRATA_PA_V2T`、`STRATA_REFILL_PARTS`、`STRATA_XN_F16`、`STRATA_TOPK_SAMPLE`、`STRATA_SM75_IL`、`STRATA_SM75_EXP`、`STRATA_GR_UP75`、`STRATA_SCORES_HALVE`、`STRATA_TOPK_SPLIT`、`STRATA_TC_SM75`。
+
+`STRATA_SELECT_SIMT` 在本版本只判断 `"1"`，文档的 `2` 不会生效；`--pipeline-windows` 在 NVIDIA 上仍是 opt-in（AMD gfx12 才默认开）。
+
+### 9.6 功能验收
+
+- 短答 3/3：巴黎、5、疑是地上霜。
+- 针召回 **12/12**：1k/32k/64k/128k × 深度 10/50/90（`tools/needle_bench.py`，thinking off）。
+- 视觉 1/1：生成含 `7349` 的 PNG，data URL 发送，模型答 `7349`。
+- 262K 启动正常，两卡空闲显存约 885 / 795 MiB（含 pipeline 预留）。
+
+### 9.7 顺带同步到其他配置
+
+`strata-iq2_xs.json`、`strata-orca-iq3_xxs.json` 也加入了同一组 env、`--pipeline-windows 2`、conversation cache（未改 `layer_split: auto`）。IQ2_XS 复测：6K prefill **1071 tok/s**（旧值 910，+17.7%），decode 85.6 tok/s（与旧值 87.8 同量级）；Orca 未复测。
+
+> 262K 仍是风险档：若启动期/长读出现 arena 或显存不足，先回退 `--max-context 204800` 与 `layer_split 22`，其余开关可保留。

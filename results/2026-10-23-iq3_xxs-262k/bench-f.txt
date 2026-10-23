@@ -1,0 +1,7 @@
+=== split24+chunk16k ===
+prefill prompt_n=  6002   1063.4 tok/s (   5.7s wall)
+prefill prompt_n= 23834   1405.3 tok/s (  17.1s wall)
+prefill prompt_n= 89228   2165.0 tok/s (  41.4s wall)
+decode  gen_n=256  81.00 tok/s (   3.8s wall)
+decode  gen_n=256  83.50 tok/s (   3.7s wall)
+SUMMARY {"tag": "split24+chunk16k", "prefill": {"32000": {"prompt_n": 6002, "tps": 1063.4}, "128000": {"prompt_n": 23834, "tps": 1405.3}, "480000": {"prompt_n": 89228, "tps": 2165.0}}, "decode": {"gen_n": 256.0, "tps": 82.25}}

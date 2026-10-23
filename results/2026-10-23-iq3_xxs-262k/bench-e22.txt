@@ -1,0 +1,7 @@
+=== split22 ===
+prefill prompt_n=  6001   1059.3 tok/s (   5.7s wall)
+prefill prompt_n= 23834   1676.0 tok/s (  14.3s wall)
+prefill prompt_n= 89228   2022.8 tok/s (  44.3s wall)
+decode  gen_n=256  78.60 tok/s (   4.0s wall)
+decode  gen_n=256  83.70 tok/s (   3.7s wall)
+SUMMARY {"tag": "split22", "prefill": {"32000": {"prompt_n": 6001, "tps": 1059.3}, "128000": {"prompt_n": 23834, "tps": 1676.0}, "480000": {"prompt_n": 89228, "tps": 2022.8}}, "decode": {"gen_n": 256.0, "tps": 81.15}}

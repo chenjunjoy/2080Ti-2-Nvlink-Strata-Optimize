@@ -1,0 +1,7 @@
+=== env-bf16-simt-help ===
+prefill prompt_n=  5998   1051.3 tok/s (   5.8s wall)
+prefill prompt_n= 23833   1631.8 tok/s (  14.7s wall)
+prefill prompt_n= 89224   1932.4 tok/s (  46.4s wall)
+decode  gen_n=256  71.80 tok/s (   4.3s wall)
+decode  gen_n=256  77.60 tok/s (   4.0s wall)
+SUMMARY {"tag": "env-bf16-simt-help", "prefill": {"32000": {"prompt_n": 5998, "tps": 1051.3}, "128000": {"prompt_n": 23833, "tps": 1631.8}, "480000": {"prompt_n": 89224, "tps": 1932.4}}, "decode": {"gen_n": 256.0, "tps": 74.69999999999999}}

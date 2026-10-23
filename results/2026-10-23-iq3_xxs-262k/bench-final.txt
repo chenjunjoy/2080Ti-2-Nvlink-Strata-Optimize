@@ -1,0 +1,10 @@
+=== final ===
+prefill prompt_n=  5999   1068.9 tok/s (   5.7s wall)
+prefill prompt_n=  6001   1051.3 tok/s (   5.8s wall)
+prefill prompt_n= 23833   1767.3 tok/s (  13.6s wall)
+prefill prompt_n= 23832   1737.1 tok/s (  13.8s wall)
+prefill prompt_n= 89227   2220.6 tok/s (  40.4s wall)
+prefill prompt_n= 89224   2172.9 tok/s (  41.2s wall)
+decode  gen_n=256  75.90 tok/s (   5.1s wall)
+decode  gen_n=256  80.60 tok/s (   3.8s wall)
+SUMMARY {"tag": "final", "prefill": {"32000": {"prompt_n": 6000.0, "tps": 1060.1}, "128000": {"prompt_n": 23832.5, "tps": 1752.1999999999998}, "480000": {"prompt_n": 89225.5, "tps": 2196.75}}, "decode": {"gen_n": 256.0, "tps": 78.25}}
