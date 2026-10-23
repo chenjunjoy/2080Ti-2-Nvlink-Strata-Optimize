@@ -234,6 +234,7 @@ python3 /srv/share/strata-ops/quality-bench.py
 | vision | GPU | 不变 | 视觉实测正常；改 CPU 对文本速度无收益 |
 
 备份：`/srv/share/strata-ops/backups/strata-sc117-iq3_xxs.json.pre-opt-20261023-142008`。
+原始策略快照：[`docs/ORIGINAL-STRATEGY-sc117-262k.zh-CN.md`](docs/ORIGINAL-STRATEGY-sc117-262k.zh-CN.md)；原始配置样本：[`configs/strata-sc117-iq3_xxs.pre-opt.json`](configs/strata-sc117-iq3_xxs.pre-opt.json)。
 
 ### 9.2 实测（同机、262K、单请求、greedy、thinking off）
 
