@@ -248,6 +248,8 @@ python3 /srv/share/strata-ops/quality-bench.py
 
 > 对象：`SC117 Qwen3.8-Flash-Next abliterated IQ3_XXS`，262144 context，2×2080Ti 22G，本机约 60 GiB 可用内存，引擎 0.1.44.1。
 > 约束：**不下载新权重、不重编译引擎**，只使用 0.1.44.1 已支持的开关。参考文档的 9 个 sm_75 PR 批次（v0.1.43）在本机二进制中大多没有对应 env（见 §9.5），因此未打补丁、也未设置无效变量。
+>
+> 完整复盘（结论可信度、失误与下一步）：[`docs/RETROSPECTIVE-2026-10-23.zh-CN.md`](docs/RETROSPECTIVE-2026-10-23.zh-CN.md)。
 
 ### 9.1 最终改动（已生效）
 
