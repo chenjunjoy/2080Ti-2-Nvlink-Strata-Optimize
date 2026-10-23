@@ -143,6 +143,8 @@ nohup .venv/bin/python serve/server.py \
 
 本机实际采用的是其中能在 0.1.44.1 上生效、且经本机 A/B 验证的部分；未照抄项与差异见 [`../README.md`](../README.md) §9.4–§9.5。
 
+参考文档原文存档：[`../reference/Qwen3.8-Flash-Next-IQ3_S-dual-2080Ti-262K-deploy-guide.zh-CN.md`](../reference/Qwen3.8-Flash-Next-IQ3_S-dual-2080Ti-262K-deploy-guide.zh-CN.md)。
+
 ## 8. 与优化后策略的差异
 
 | 项 | 原始 | 优化后 |

@@ -14,7 +14,7 @@
    - 单请求 decode **82.7 → 87.8 tok/s（+6.2%）**
    - 6K prefill **881.6 → 910.0 tok/s（+3.2%）**
    - Orca 6K 提示读取 **21.6 s → 6.72 s（快 3.2×）**
-2. **`--pipeline-windows 2` 经严格 A/B 验证为 +3.9% decode**（两个模型同向，prefill 持平），但**当前生产配置并未启用**，只存在于 `.pw2.json` 变体（见 §3）。
+2. **`--pipeline-windows 2` 经严格 A/B 验证为 +3.9% decode**（两个模型同向，prefill 持平）；2026-10-23 起已在三份配置启用，见 §2.6 / §9。
 3. **Strata 用不到 NVLink**：层并行（layer split）不是张量并行，无 P2P/AllReduce，验证窗口之间只传几百 KB 激活，走 PCIe ~6 GB/s 即可。
 4. **负载选型**：Strata IQ2_XS 生成快（84 tok/s、125B）；vLLM 27B 长提示读取更快（6K 4.66 s）且吃 NVLink；无审查的 vLLM 27B + DFlash2 生成最快（93.7 tok/s）。
 5. **质量**：6 道基准题 Strata(125B IQ2_XS) 与 vLLM(27B NVFP4) **全部打平**。
@@ -125,13 +125,31 @@
 - 风格差异：Strata 更简洁；vLLM 更啰嗦、爱补充"常见错误答案"。
 - 该套题偏中等难度，不能区分 125B 与 27B 的能力上限。
 
+### 2.6 262K / IQ3_XXS 重调（2026-10-23，接续 §9）
+
+对象：SC117 IQ3_XXS abliterated，262144 context，2×2080Ti 22G，引擎 0.1.44.1。方法同 §2.1：单请求、greedy、`reasoning_effort=none`、逐次唯一 prompt 避开缓存、decode 256 token。
+
+| 项目 | 原始策略 | 参考指南重调后 | 变化 |
+|---|---:|---:|---:|
+| 6.0K prefill | 901.0 tok/s | **1060.1 tok/s** | **+17.7%** |
+| 23.8K prefill | 1345.3 tok/s | **1752.2 tok/s** | **+30.3%** |
+| 89.2K prefill | 1467.3 tok/s | **2196.8 tok/s** | **+49.7%** |
+| decode（256 tok） | 74.3 tok/s | **84.1 tok/s** | **+8–13%** |
+
+- 原始策略：`layer_split 20`、8K chunk、无 BF16_TC / QSA SIMT / pipeline / 会话缓存。
+- 重调后：`layer_split 24`、`STRATA_BF16_TC=1` + `STRATA_SELECT_SIMT=1` + `STRATA_PREFILL_HELP=1`、`--pipeline-windows 2`、8K chunk。
+- 未采用 `--prefill auto:16384`（本机 23.8K 长度 −21%）；层切分扫描与逐项归因见 §9.3–§9.4。
+- 原始输出：[`results/2026-10-23-iq3_xxs-262k/`](results/2026-10-23-iq3_xxs-262k/)。
+
 ---
 
 ## 3. ⚠️ 已验证但**未上线**的优化：`--pipeline-windows 2`
 
-- 生产服务读取的是 `strata-iq2_xs.json` / `strata-orca-iq3_xxs.json`，**都不含** `--pipeline-windows`。
-- 带该参数的只有 `strata-iq2_xs.pw2.json` / `strata-orca-iq3_xxs.pw2.json` 两个变体，且这两个变体**早于** `reasoning_effort: none`，直接拿来用会把 no-think 配置丢掉。
-- 若决定上线（+3.9% decode，代价 272 MiB/卡缓存、极小输出差异）：
+> 2026-10-23 更新：该优化已在 `strata-sc117-iq3_xxs.json`、`strata-iq2_xs.json`、`strata-orca-iq3_xxs.json` 启用；本节保留 2026-10-17 的验证过程与代价。
+
+- 2026-10-23 之前，生产服务读取的是 `strata-iq2_xs.json` / `strata-orca-iq3_xxs.json`，**都不含** `--pipeline-windows`；现在三份配置均已加入。
+- 历史上带该参数的只有 `strata-iq2_xs.pw2.json` / `strata-orca-iq3_xxs.pw2.json` 两个变体，且这两个变体**早于** `reasoning_effort: none`，直接拿来用会把 no-think 配置丢掉。
+- 上线方法（已于 2026-10-23 执行，+3.9% decode，代价 272 MiB/卡缓存、极小输出差异）：
   1. 在当前生产配置的 `args` 末尾追加 `"--pipeline-windows", "2"`；
   2. 保留 `"reasoning_effort": "none"`；
   3. 重启服务，日志应出现：
@@ -283,6 +301,8 @@ python3 /srv/share/strata-ops/quality-bench.py
 `STRATA_PA_V2T`、`STRATA_REFILL_PARTS`、`STRATA_XN_F16`、`STRATA_TOPK_SAMPLE`、`STRATA_SM75_IL`、`STRATA_SM75_EXP`、`STRATA_GR_UP75`、`STRATA_SCORES_HALVE`、`STRATA_TOPK_SPLIT`、`STRATA_TC_SM75`。
 
 `STRATA_SELECT_SIMT` 在本版本只判断 `"1"`，文档的 `2` 不会生效；`--pipeline-windows` 在 NVIDIA 上仍是 opt-in（AMD gfx12 才默认开）。
+
+参考文档原文存档：[`reference/Qwen3.8-Flash-Next-IQ3_S-dual-2080Ti-262K-deploy-guide.zh-CN.md`](reference/Qwen3.8-Flash-Next-IQ3_S-dual-2080Ti-262K-deploy-guide.zh-CN.md)。
 
 ### 9.6 功能验收
 
