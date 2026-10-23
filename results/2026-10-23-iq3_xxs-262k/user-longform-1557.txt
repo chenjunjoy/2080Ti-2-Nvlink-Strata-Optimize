@@ -1,0 +1,21 @@
+# 真实长文请求（2026-10-23 15:57，SC117 IQ3_XXS 262K）
+
+来源：/srv/share/Strata/strata-sc117-iq3_xxs.log 与 /tmp/opencode/final-server.log
+配置：layer_split 24, BF16_TC=1, SELECT_SIMT=1, PREFILL_HELP=1, pipeline-windows 2, 8K chunk
+
+## 服务端进度
+[strata] reading the prompt: 8,192 of 18,228 tokens, 6 s so far
+[strata] reading the prompt: 16,384 of 18,228 tokens, 9 s so far
+[strata] reading the prompt: 18,223 of 18,228 tokens, 12 s so far
+[strata] reading the prompt: 18,227 of 18,228 tokens, 13 s so far
+[strata] done: 9924 tokens in 110 s (102.6 tok/s) (stop, cancel=False), expert cache 100.0% hit (+0.6% of the routed experts over PCIe)
+
+## 引擎统计
+strata serve: prompt 18228 tokens = 0 reused + 18228 read in 13223 ms (1378.5 tok/s), 9924 generated in 96784 ms (102.5 tok/s), drafts accepted 6774 of 7544, 2 checkpoints
+strata serve: decode expert cache hit rate: 100.0% (5459056 hits / 5459056 lookups); 32556 more read by the GPU over PCIe or from another GPU (0.6% of all 5491612 routed)
+strata serve: KV streaming: 99.89% of 38453910 block reads hit VRAM, 170.0 MiB read from RAM
+strata serve: suffix drafts: 262 windows, 1251 of 1286 drafts accepted
+
+## 日志落盘时间
+2026-10-23 15:57:36.132626433 +0800 /srv/share/Strata/strata-sc117-iq3_xxs.log
+2026-10-23 15:57:36.132626433 +0800 /tmp/opencode/final-server.log

@@ -18,7 +18,7 @@
 3. **Strata 用不到 NVLink**：层并行（layer split）不是张量并行，无 P2P/AllReduce，验证窗口之间只传几百 KB 激活，走 PCIe ~6 GB/s 即可。
 4. **负载选型**：Strata IQ2_XS 生成快（84 tok/s、125B）；vLLM 27B 长提示读取更快（6K 4.66 s）且吃 NVLink；无审查的 vLLM 27B + DFlash2 生成最快（93.7 tok/s）。
 5. **质量**：6 道基准题 Strata(125B IQ2_XS) 与 vLLM(27B NVFP4) **全部打平**。
-6. **2026-10-23 更新**：按 Qwen3.8 IQ3_S 双 2080Ti 指南重调 262K（SC117 IQ3_XXS）配置：prefill **+18% / +30% / +50%**（6K / 24K / 89K），decode **+8–13%**，针召回 12/12。详见 §9。
+6. **2026-10-23 更新**：按 Qwen3.8 IQ3_S 双 2080Ti 指南重调 262K（SC117 IQ3_XXS）配置：prefill **+18% / +30% / +50%**（6K / 24K / 89K），decode **+8–13%**，针召回 12/12；真实 18K→9.9K 长文 decode **102.5 tok/s**。详见 §2.6 / §9。
 
 ---
 
@@ -140,6 +140,22 @@
 - 重调后：`layer_split 24`、`STRATA_BF16_TC=1` + `STRATA_SELECT_SIMT=1` + `STRATA_PREFILL_HELP=1`、`--pipeline-windows 2`、8K chunk。
 - 未采用 `--prefill auto:16384`（本机 23.8K 长度 −21%）；层切分扫描与逐项归因见 §9.3–§9.4。
 - 原始输出：[`results/2026-10-23-iq3_xxs-262k/`](results/2026-10-23-iq3_xxs-262k/)。
+
+#### 真实长文请求（2026-10-23 15:57，非受控）
+
+用户经 `127.0.0.1:8080` 实际发起：**18,228 prompt tokens → 9,924 output tokens**。
+
+| 指标 | 实测 |
+|---|---:|
+| prompt 读取 | 13,223 ms → **1,378.5 tok/s** |
+| 生成 | 96,784 ms → **102.5 tok/s**（服务端 `done` 102.6） |
+| 端到端（含读提示） | 9,924 / 110 s ≈ **90.2 tok/s** |
+| MTP 草稿接受 | 6,774 / 7,544 = **89.8%** |
+| 专家缓存命中 | **100.0%**（另有 0.6% 经 PCIe） |
+| KV 常驻命中 | **99.89%**（170 MiB 从 RAM 读） |
+| suffix drafts | 1,251 / 1,286 |
+
+说明：长输出进入稳态后 decode 高于 256-token 短测的 84.1 tok/s，更接近日常长文生成；prefill 低于受控 18–24K 合成文本，真实提示的 token/专家路由分布与重复合成文本不同，不宜直接横比。
 
 ---
 
@@ -267,6 +283,7 @@ python3 /srv/share/strata-ops/quality-bench.py
 - 优化后：split 24、BF16_TC+SIMT+HELP、pipeline 2、8K chunk。
 - decode 波动较大：基线 2 次（69.7 / 78.8），最终 5 次（81.6–87.0，中位 84.1）。prefill 多次重复误差约 1–2%。
 - 原始输出：[`results/2026-10-23-iq3_xxs-262k/`](results/2026-10-23-iq3_xxs-262k/)。
+- 补充：2026-10-23 15:57 的真实长文请求（18,228 → 9,924 tokens）prefill **1,378.5 tok/s**、decode **102.5 tok/s**（MTP 接受 89.8%），详见 §2.6。
 
 ### 9.3 分项归因
 
