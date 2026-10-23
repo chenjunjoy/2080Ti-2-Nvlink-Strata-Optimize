@@ -332,6 +332,17 @@ python3 /srv/share/strata-ops/quality-bench.py
 
 ### 9.7 顺带同步到其他配置
 
-`strata-iq2_xs.json`、`strata-orca-iq3_xxs.json` 也加入了同一组 env、`--pipeline-windows 2`、conversation cache（未改 `layer_split: auto`）。IQ2_XS 复测：6K prefill **1071 tok/s**（旧值 910，+17.7%），decode 85.6 tok/s（与旧值 87.8 同量级）；Orca 未复测。
+`strata-iq2_xs.json`、`strata-orca-iq3_xxs.json` 也加入了同一组 env、`--pipeline-windows 2`、conversation cache（未改 `layer_split: auto`）。IQ2_XS 复测：6K prefill **1071 tok/s**（旧值 910，+17.7%），decode 85.6 tok/s（与旧值 87.8 同量级）。
+
+Orca 完成严格 A/B（2026-10-23，131K，5 次 decode）：
+
+| 项目 | 基线 | 新配置 | 变化 |
+|---|---:|---:|---:|
+| 6K prefill | 890.8 | **923.4** | **+3.7%** |
+| 23.8K prefill | 1297.4 | **1467.6** | **+13.1%** |
+| decode（256 tok） | 75.2 | 76.1 | +1.2%（噪声内） |
+| 加载后显存 | 483 / 393 MiB | 571 / 481 MiB | 略好，但仍 LOW |
+
+结论：env + pipeline 对 Orca **无负收益**；prefill 明显提升，decode 持平。Orca 的 `--vram-reserve-mib 700` 仍偏低，后续单独评估 `1024` 或 `--vram-reserve-later-mib`。原始输出见 [`results/2026-10-23-iq3_xxs-262k/orca-ab-summary.txt`](results/2026-10-23-iq3_xxs-262k/orca-ab-summary.txt)。
 
 > 262K 仍是风险档：若启动期/长读出现 arena 或显存不足，先回退 `--max-context 204800` 与 `layer_split 22`，其余开关可保留。

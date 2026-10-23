@@ -1,0 +1,8 @@
+=== orca-new ===
+prefill prompt_n=  5996    930.2 tok/s (   6.6s wall)
+prefill prompt_n=  5996    916.6 tok/s (   6.6s wall)
+prefill prompt_n= 23835   1472.3 tok/s (  16.3s wall)
+prefill prompt_n= 23835   1462.8 tok/s (  16.4s wall)
+decode  gen_n=256  77.80 tok/s (   4.6s wall)
+decode  gen_n=256  72.60 tok/s (   4.4s wall)
+SUMMARY {"tag": "orca-new", "prefill": {"32000": {"prompt_n": 5996.0, "tps": 923.4000000000001}, "128000": {"prompt_n": 23835.0, "tps": 1467.55}}, "decode": {"gen_n": 256.0, "tps": 75.19999999999999}}

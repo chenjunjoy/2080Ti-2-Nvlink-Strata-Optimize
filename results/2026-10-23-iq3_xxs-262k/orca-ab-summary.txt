@@ -1,0 +1,25 @@
+# Orca IQ3_XXS A/B（2026-10-23，131072 context，2x 2080Ti）
+
+协议：同机、同模型、greedy、reasoning_effort=none、逐次唯一 prompt、8K chunk、decode 256 token。
+基线：pre-docopt 配置（无 env / 无 pipeline / 无会话缓存）
+新配置：BF16_TC=1 + SELECT_SIMT=1 + PREFILL_HELP=1 + pipeline-windows 2 + conversation cache
+
+## prefill（2 次）
+
+基线 6K:    886.5 / 895.0  -> 中位 890.8 tok/s
+基线 23.8K: 1300.6 / 1294.3 -> 中位 1297.4 tok/s
+新 6K:      930.2 / 916.6  -> 中位 923.4 tok/s   (+3.7%)
+新 23.8K:   1472.3 / 1462.8 -> 中位 1467.6 tok/s (+13.1%)
+
+## decode（5 次，256 token）
+
+基线: 76.9 / 70.5 / 75.2 / 72.5 / 75.5 -> 中位 75.2 tok/s
+新:   76.1 / 72.6 / 77.4 / 71.4 / 78.5 -> 中位 76.1 tok/s   (+1.2%，噪声内)
+
+## 显存
+
+基线加载后: 483 / 393 MiB free（LOW 告警）
+新配置加载后: 571 / 481 MiB free（仍有 LOW 告警）
+
+结论：env + pipeline 对 Orca 无负收益；prefill 明显提升，decode 持平。
+后续：Orca 的 --vram-reserve-mib 700 偏低，建议评估 1024 或 --vram-reserve-later-mib。
